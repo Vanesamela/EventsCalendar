@@ -65,7 +65,7 @@
             <input type="submit" value="Subir Foto">
         </form>
         <div class="back-btn">
-            <a href="mainOrg.php?usuario=<?php echo urlencode($usuario); ?>">Volver al dasboard</a>
+            <a href="mainOrg.php?usuario=<?php echo urlencode($usuario); ?>">Volver al dasboard Organizador</a>
         </div>
     </div>
 </body>

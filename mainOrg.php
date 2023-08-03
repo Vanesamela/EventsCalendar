@@ -34,7 +34,7 @@
                 $rutaFotoPerfil = "img/" . $filas['foto_perfil'];
                 if (file_exists($rutaFotoPerfil)) {
                     echo "<div class='profile'>";
-                    echo "<h1>Perfil del Organizador</h1>";
+                    echo "<h1>Organizador</h1>";
                     echo "<a href='cambiarFoto.php?usuario=" . urlencode($usuario) . "'>";
                     echo "<img src='$rutaFotoPerfil' alt='Foto de Perfil del Organizador' width='100' height='100'>";
                     echo "</a>";
