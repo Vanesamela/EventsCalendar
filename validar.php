@@ -60,7 +60,7 @@ if (mysqli_num_rows($ejecutar) > 0) {
     $filas = mysqli_fetch_array($ejecutar);
 
     if ($filas['id_cargo'] == 1) { // Administrador       
-        header("Location:admin.php?usuario=" . urlencode($usuario));     
+        header("Location: mainAdm.php?usuario=" . urlencode($usuario));     
     } else if ($filas['id_cargo'] == 2) { // Organizador
         header("Location: mainOrg.php?usuario=" . urlencode($usuario));      
         exit;
