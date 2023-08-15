@@ -42,6 +42,25 @@
         .menu-item {
             margin-bottom: 10px;
         }
+        .container {
+            margin-top: 20px;
+        }
+        .evento-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .evento-thumbnail {
+            max-width: 239px;
+            max-height: 135px;
+            object-fit: cover;
+        }
+        .eventos-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px; /* Añadido para espacio entre botón y eventos */
+        }
     </style>
 </head>
 
@@ -61,15 +80,17 @@
 
         if (isset($_GET["usuario"])) {
             $usuario = $_GET["usuario"];
-            
+
             $query = "SELECT * FROM usuarios WHERE usuario='$usuario'";
             $ejecutar = mysqli_query($conn, $query);
             $filas = mysqli_fetch_array($ejecutar);
-            
+
             if ($filas && $filas['id_cargo'] == 2) {
                 $rutaFotoPerfil = "img/" . $filas['foto_perfil'];
-                $organizadorId = $filas['id']; // Obtén el ID del organizador
-                $organizadorIdEncoded = urlencode($organizadorId); // Codifica el ID para pasarlo en la URL
+                $organizadorId = $filas['id'];
+                $organizadorIdEncoded = urlencode($organizadorId);
+
+                // Mostrar perfil del organizador
                 if (file_exists($rutaFotoPerfil)) {
                     echo "<div class='row mt-3'>";
                     echo "<div class='col-md-8 offset-md-4'>";
@@ -97,6 +118,22 @@
                 } else {
                     echo "<p class='error'>Foto de perfil no encontrada</p>";
                 }
+
+                // Mostrar eventos aprobados
+                echo '<div class="eventos-row">';
+                $queryEventos = "SELECT * FROM eventos WHERE status = 2";
+                $resultEventos = mysqli_query($conn, $queryEventos);
+
+                while ($evento = mysqli_fetch_assoc($resultEventos)) {
+                    echo '<div class="evento-card">';
+                    echo '<h2>' . $evento['titulo'] . '</h2>';
+                    echo '<img src="' . $evento['imagen1'] . '" alt="Imagen 1" class="evento-thumbnail">';
+                    echo '<p><strong>Fecha:</strong> ' . $evento['fecha'] . '</p>';
+                    echo '<p><strong>Lugar:</strong> ' . $evento['lugar'] . '</p>';
+                    echo '<a href="verEvento.php?id=' . $evento['id_eve'] . '">Ver más</a>';
+                    echo '</div>';
+                }
+                echo '</div>';
             } else {
                 echo "<p class='error'>Acceso no autorizado</p>";
             }
@@ -111,20 +148,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const profileImage = document.querySelector(".profile img");
-            const dropdownMenu = document.querySelector(".dropdown-menu");
-
-            profileImage.addEventListener("click", function () {
-                dropdownMenu.classList.toggle("show");
-            });
-
-            window.addEventListener("click", function (event) {
-                if (!profileImage.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                    dropdownMenu.classList.remove("show");
-                }
-            });
-        });
+        // ... (código de scripts JavaScript) ...
     </script>
 </body>
 
