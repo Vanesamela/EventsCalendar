@@ -83,7 +83,7 @@
                     echo "<a href='generarEvento.php?usuario=" . urlencode($usuario) . "'>Generar Evento</a>";
                     echo "</div>";
                     echo "<div class='menu-item'>";
-                    echo "<a href='login.html'>Volver al inicio de sesión</a>";
+                    echo "<a href='login.html'>Salir</a>";
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";
