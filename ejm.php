@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Cambiar Foto de Perfil</title>
+    <title>Editar Perfil</title>
+    <!-- Agrega el enlace a Bootstrap CDN aquí -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container">
-        <h1>Cambiar Foto de Perfil</h1>
+        <h1>Editar Perfil</h1>
         <?php
         if (isset($_GET["usuario"])) {
             $usuario = $_GET["usuario"];
@@ -60,14 +61,12 @@
             echo "<p class='error'>Usuario no especificado</p>";
         }
         ?>
-        <form action="cambiarFoto.php?usuario=<?php echo urlencode($usuario); ?>" method="post" enctype="multipart/form-data">
-            <input type="file" name="nuevaFoto" required accept="image/*">
-            <input type="submit" value="Subir Foto">
-        </form>
-        <div class="back-btn">
-            <a href="mainOrg.php?usuario=<?php echo urlencode($usuario); ?>">Volver al dasboard</a>
+        
+        <div class="back-btn mt-3">
+            <a href="mainOrg.php?usuario=<?php echo urlencode($usuario); ?>">Volver al Dashboard</a>
         </div>
     </div>
+    <!-- Agrega el script de Bootstrap si es necesario -->
 </body>
 
 </html>

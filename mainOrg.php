@@ -79,7 +79,7 @@
                     echo "<img src='$rutaFotoPerfil' alt='Foto de Perfil del Organizador' width='100' height='100'>";
                     echo "<div class='dropdown-menu ml-2'>";
                     echo "<div class='menu-item'>";
-                    echo "<a href='cambiarFoto.php?usuario=" . urlencode($usuario) . "'>Cambiar Foto de Perfil</a>";
+                    echo "<a href='editarPer.php?usuario=" . urlencode($usuario) . "'>Editar Perfil</a>";
                     echo "</div>";
                     echo "<div class='menu-item'>";
                     echo "<a href='generarEvento.php?usuario=" . urlencode($usuario) . "&organizadorId=" . $organizadorIdEncoded . "'>Generar Evento</a>";
