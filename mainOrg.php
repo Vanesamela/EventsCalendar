@@ -61,13 +61,15 @@
 
         if (isset($_GET["usuario"])) {
             $usuario = $_GET["usuario"];
-
+            
             $query = "SELECT * FROM usuarios WHERE usuario='$usuario'";
             $ejecutar = mysqli_query($conn, $query);
             $filas = mysqli_fetch_array($ejecutar);
-
+            
             if ($filas && $filas['id_cargo'] == 2) {
                 $rutaFotoPerfil = "img/" . $filas['foto_perfil'];
+                $organizadorId = $filas['id']; // Obtén el ID del organizador
+                $organizadorIdEncoded = urlencode($organizadorId); // Codifica el ID para pasarlo en la URL
                 if (file_exists($rutaFotoPerfil)) {
                     echo "<div class='row mt-3'>";
                     echo "<div class='col-md-8 offset-md-4'>";
@@ -80,7 +82,7 @@
                     echo "<a href='cambiarFoto.php?usuario=" . urlencode($usuario) . "'>Cambiar Foto de Perfil</a>";
                     echo "</div>";
                     echo "<div class='menu-item'>";
-                    echo "<a href='generarEvento.php?usuario=" . urlencode($usuario) . "'>Generar Evento</a>";
+                    echo "<a href='generarEvento.php?usuario=" . urlencode($usuario) . "&organizadorId=" . $organizadorIdEncoded . "'>Generar Evento</a>";
                     echo "</div>";
                     echo "<div class='menu-item'>";
                     echo "<a href='login.html'>Salir</a>";
@@ -88,6 +90,7 @@
                     echo "</div>";
                     echo "</div>";
                     echo "<p><strong>Nombre:</strong> " . $filas['nombre'] . "</p>";
+                    echo "<p><strong>ID:</strong>" . $filas['id'] . "</p>";
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";

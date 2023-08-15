@@ -59,8 +59,8 @@ if (!$ejecutar) {
 if (mysqli_num_rows($ejecutar) > 0) {
     $filas = mysqli_fetch_array($ejecutar);
 
-    if ($filas['id_cargo'] == 1) { // Administrador
-        echo "<script> alert('Usuario Administrador');window.location= 'admin.php' </script>";
+    if ($filas['id_cargo'] == 1) { // Administrador       
+        header("Location:admin.php?usuario=" . urlencode($usuario));     
     } else if ($filas['id_cargo'] == 2) { // Organizador
         header("Location: mainOrg.php?usuario=" . urlencode($usuario));      
         exit;

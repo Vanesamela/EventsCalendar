@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fecha = $_POST["fecha"];
     $lugar = $_POST["lugar"];
     $descripcion = $_POST["descripcion"];
+    $idOrganizador = $_POST["id_organizador"];
 
     // Configura tus credenciales y detalles de Firebase Storage aquí
     $storage = new \Google\Cloud\Storage\StorageClient([
@@ -53,8 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Insertar la información del evento y las URLs de las imágenes en la base de datos
         $status = 1; // Nuevo campo "status" con valor 1
-        $insertQuery = "INSERT INTO eventos (titulo, fecha, lugar, descripcion, imagen1, imagen2, status)
-                        VALUES ('$titulo', '$fecha', '$lugar', '$descripcion', '$urlImagen1', '$urlImagen2', '$status')";
+        $insertQuery = "INSERT INTO eventos (titulo, fecha, lugar, descripcion, imagen1, imagen2, status,id_org)
+                        VALUES ('$titulo', '$fecha', '$lugar', '$descripcion', '$urlImagen1', '$urlImagen2', '$status','$idOrganizador')";
 
         if (mysqli_query($conn, $insertQuery)) {
             echo "Evento guardado correctamente.";

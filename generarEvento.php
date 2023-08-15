@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generar Evento</title>
-     <!-- Agrega el enlace a Bootstrap CDN aquí -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Agrega el enlace a Bootstrap CDN aquí -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Agrega el SDK de Firebase aquí -->
     <script type="module">
         // Importa las funciones que necesitas del SDK de Firebase
@@ -82,6 +82,12 @@
     <div class="container">
         <h1 class="mt-5">Generar Evento</h1>
         <form action="procesarEvento.php" method="post" enctype="multipart/form-data" class="mt-4">
+            <?php
+            if (isset($_GET["organizadorId"])) {
+                $organizadorId = $_GET["organizadorId"];
+                echo "<input type='hidden' name='id_organizador' value='$organizadorId'>";
+            }
+            ?>
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título del Evento:</label>
                 <input type="text" id="titulo" name="titulo" class="form-control" required>
@@ -106,7 +112,8 @@
                 <label for="imagen2" class="form-label">Imagen 2:</label>
                 <input type="file" id="imagen2" name="imagen2" accept="image/*" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary">Guardar Evento</button>                    
+
+            <button type="submit" class="btn btn-primary">Guardar Evento</button>
         </form>
     </div>
     <!-- Agrega aquí tus scripts adicionales si los necesitas -->
