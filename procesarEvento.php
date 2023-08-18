@@ -15,6 +15,7 @@ $successMessage = "";
 $errorMessage = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $usuario = $_POST["usuario"];
     $titulo = $_POST["titulo"];
     $fecha = $_POST["fecha"];
     $lugar = $_POST["lugar"];
@@ -58,7 +59,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         VALUES ('$titulo', '$fecha', '$lugar', '$descripcion', '$urlImagen1', '$urlImagen2', '$status','$idOrganizador')";
 
         if (mysqli_query($conn, $insertQuery)) {
+            header("Location: mainOrg.php?usuario=" . urlencode($usuario));
             echo "Evento guardado correctamente.";
+
             $_POST = array();
         } else {
             echo "Error al guardar el evento: " . mysqli_error($conn);
@@ -87,7 +90,7 @@ mysqli_close($conn);
         // Redirigir después de mostrar el mensaje y vaciar el formulario
         setTimeout(function() {
             window.location.href = 'generarEvento.php'; // Cambia a la página actual
-        }, 3000); // Redirigir después de 3 segundos (ajusta según sea necesario)
+        }, 1000); // Redirigir después de 3 segundos (ajusta según sea necesario)
     </script>
 </body>
 </html>

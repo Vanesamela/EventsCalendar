@@ -26,7 +26,8 @@
             text-align: right;
             padding-top: 10px;
             display: inline-block;
-            float: right; /* Añadido para alinear a la derecha */
+            float: right;
+            /* Añadido para alinear a la derecha */
         }
 
         .profile img {
@@ -42,24 +43,29 @@
         .menu-item {
             margin-bottom: 10px;
         }
+
         .container {
             margin-top: 20px;
         }
+
         .evento-card {
             border: 1px solid #ccc;
             padding: 10px;
             margin-bottom: 20px;
         }
+
         .evento-thumbnail {
             max-width: 239px;
             max-height: 135px;
             object-fit: cover;
         }
+
         .eventos-row {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            margin-top: 20px; /* Añadido para espacio entre botón y eventos */
+            margin-top: 20px;
+            /* Añadido para espacio entre botón y eventos */
         }
     </style>
 </head>
@@ -130,7 +136,7 @@
                     echo '<img src="' . $evento['imagen1'] . '" alt="Imagen 1" class="evento-thumbnail">';
                     echo '<p><strong>Fecha:</strong> ' . $evento['fecha'] . '</p>';
                     echo '<p><strong>Lugar:</strong> ' . $evento['lugar'] . '</p>';
-                    echo '<a href="verEvento.php?id=' . $evento['id_eve'] . '">Ver más</a>';
+                    echo '<a href="javascript:void(0);" onclick="verDetalles(' . $evento['id_eve'] . ');">Ver más</a>'; // Cambio en el enlace
                     echo '</div>';
                 }
                 echo '</div>';
@@ -148,7 +154,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        // ... (código de scripts JavaScript) ...
+        function verDetalles(eventoId) {
+            // Abre una nueva ventana o pestaña con el archivo verEvento.php y el ID del evento
+            window.open('verEvento.php?id=' + eventoId, '_blank');
+        }
     </script>
 </body>
 

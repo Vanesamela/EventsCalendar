@@ -82,12 +82,15 @@
     <div class="container">
         <h1 class="mt-5">Generar Evento</h1>
         <form action="procesarEvento.php" method="post" enctype="multipart/form-data" class="mt-4">
+            
             <?php
-             
+            
             if (isset($_GET["organizadorId"])) {  
                 $usuario = $_GET["usuario"];                    
                 $organizadorId = $_GET["organizadorId"];
                 echo "<input type='hidden' name='id_organizador' value='$organizadorId'>";
+                echo "<input type='hidden' name='usuario' value='$usuario'>";
+                
             }
             ?>
             <div class="mb-3">
