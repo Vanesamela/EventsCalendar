@@ -71,6 +71,7 @@
 </head>
 
 <body>
+<body>
     <div class="container">
         <?php
         $dbhost = "localhost";
@@ -126,8 +127,27 @@
                 }
 
                 // Mostrar eventos aprobados
-                echo '<div class="eventos-row">';
+                echo "<div class='eventos-row'>";
+
+                // Selector de orden
+                echo "<div>";
+                echo "<label for='orden'>Ordenar por:</label>";
+                echo "<select id='orden' onchange='cambiarOrden();'>";
+                echo "<option value='titulo' " . ($_GET['orden'] === 'titulo' ? 'selected' : '') . ">Título</option>";
+                echo "<option value='fecha' " . ($_GET['orden'] === 'fecha' ? 'selected' : '') . ">Fecha</option>";
+                echo "</select>";
+                echo "</div>";
+
                 $queryEventos = "SELECT * FROM eventos WHERE status = 2";
+
+                $orden = "titulo"; // Orden por defecto (título)
+                if (isset($_GET['orden'])) {
+                    if ($_GET['orden'] === 'fecha') {
+                        $orden = "fecha";
+                    }
+                }
+
+                $queryEventos .= " ORDER BY " . $orden;
                 $resultEventos = mysqli_query($conn, $queryEventos);
 
                 while ($evento = mysqli_fetch_assoc($resultEventos)) {
@@ -139,7 +159,7 @@
                     echo '<a href="javascript:void(0);" onclick="verDetalles(' . $evento['id_eve'] . ');">Ver más</a>'; // Cambio en el enlace
                     echo '</div>';
                 }
-                echo '</div>';
+                echo "</div>"; // Fin de eventos-row
             } else {
                 echo "<p class='error'>Acceso no autorizado</p>";
             }
@@ -150,15 +170,24 @@
         mysqli_close($conn);
         ?>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        function cambiarOrden() {
+            var select = document.getElementById("orden");
+            var ordenSeleccionado = select.options[select.selectedIndex].value;
+            var url = window.location.href.split("?")[0];
+            var usuario = "<?php echo urlencode($usuario); ?>"; // Obtener el valor del usuario desde PHP
+            window.location.href = url + "?usuario=" + usuario + "&orden=" + ordenSeleccionado;
+        }
+
         function verDetalles(eventoId) {
             // Abre una nueva ventana o pestaña con el archivo verEvento.php y el ID del evento
             window.open('verEvento.php?id=' + eventoId, '_blank');
         }
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
 </body>
 
 </html>

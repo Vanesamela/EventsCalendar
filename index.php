@@ -43,6 +43,14 @@
             <a href="login.html" class="btn btn-primary">Iniciar Sesión</a>
         </div>
 
+        <div>
+            <label for="orden">Ordenar por:</label>
+            <select id="orden" onchange="cambiarOrden();">
+                <option value="titulo">Título</option>
+                <option value="fecha">Fecha</option>
+            </select>
+        </div>
+
         <div class="eventos-row">
             <?php
             $dbhost = "localhost";
@@ -57,6 +65,15 @@
             }
 
             $query = "SELECT * FROM eventos WHERE status = 2";
+
+            $orden = "titulo"; // Orden por defecto (título)
+            if (isset($_GET['orden'])) {
+                if ($_GET['orden'] === 'fecha') {
+                    $orden = "fecha";
+                }
+            }
+
+            $query .= " ORDER BY " . $orden;
             $result = mysqli_query($conn, $query);
 
             while ($evento = mysqli_fetch_assoc($result)) {
@@ -65,7 +82,7 @@
                 echo '<img src="' . $evento['imagen1'] . '" alt="Imagen 1" class="evento-thumbnail">';
                 echo '<p><strong>Fecha:</strong> ' . $evento['fecha'] . '</p>';
                 echo '<p><strong>Lugar:</strong> ' . $evento['lugar'] . '</p>';
-                echo '<a href="javascript:void(0);" onclick="verDetalles(' . $evento['id_eve'] . ');">Ver más</a>'; // Cambio en el enlace
+                echo '<a href="javascript:void(0);" onclick="verDetalles(' . $evento['id_eve'] . ');">Ver más</a>';
                 echo '</div>';
             }
 
@@ -75,8 +92,24 @@
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Restaurar el valor seleccionado en el selector de ordenamiento
+            var urlParams = new URLSearchParams(window.location.search);
+            var ordenParam = urlParams.get("orden");
+            if (ordenParam) {
+                var select = document.getElementById("orden");
+                select.value = ordenParam;
+            }
+        });
+
+        function cambiarOrden() {
+            var select = document.getElementById("orden");
+            var ordenSeleccionado = select.options[select.selectedIndex].value;
+            var url = window.location.href.split("?")[0];
+            window.location.href = url + "?orden=" + ordenSeleccionado;
+        }
+
         function verDetalles(eventoId) {
-            // Abre una nueva ventana o pestaña con el archivo verEvento.php y el ID del evento
             window.open('verEvento.php?id=' + eventoId, '_blank');
         }
     </script>
