@@ -11,8 +11,6 @@
     <!-- Agrega el SDK de Firebase aquí -->
     <script type="module">
         // Importa las funciones que necesitas del SDK de Firebase
-        const { initializeApp } = require('firebase-admin/app');
-        const app = initializeApp();
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 
@@ -85,8 +83,9 @@
         <h1 class="mt-5">Generar Evento</h1>
         <form action="procesarEvento.php" method="post" enctype="multipart/form-data" class="mt-4">
             <?php
-            if (isset($_GET["organizadorId"])) {
-                $usuario = $_GET["usuario"];
+             
+            if (isset($_GET["organizadorId"])) {  
+                $usuario = $_GET["usuario"];                    
                 $organizadorId = $_GET["organizadorId"];
                 echo "<input type='hidden' name='id_organizador' value='$organizadorId'>";
             }
@@ -118,6 +117,7 @@
 
             <button type="submit" class="btn btn-primary">Guardar Evento</button>
             <a href="mainOrg.php?usuario=<?php echo urlencode($usuario); ?>">Volver al Dashboard</a>
+            
         </form>
     </div>
     <!-- Agrega aquí tus scripts adicionales si los necesitas -->
