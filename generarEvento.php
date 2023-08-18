@@ -11,6 +11,8 @@
     <!-- Agrega el SDK de Firebase aquí -->
     <script type="module">
         // Importa las funciones que necesitas del SDK de Firebase
+        const { initializeApp } = require('firebase-admin/app');
+        const app = initializeApp();
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
 
