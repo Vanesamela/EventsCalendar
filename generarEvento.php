@@ -86,6 +86,7 @@
         <form action="procesarEvento.php" method="post" enctype="multipart/form-data" class="mt-4">
             <?php
             if (isset($_GET["organizadorId"])) {
+                $usuario = $_GET["usuario"];
                 $organizadorId = $_GET["organizadorId"];
                 echo "<input type='hidden' name='id_organizador' value='$organizadorId'>";
             }
@@ -116,6 +117,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar Evento</button>
+            <a href="mainOrg.php?usuario=<?php echo urlencode($usuario); ?>">Volver al Dashboard</a>
         </form>
     </div>
     <!-- Agrega aquí tus scripts adicionales si los necesitas -->
